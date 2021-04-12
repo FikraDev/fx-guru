@@ -1,0 +1,41 @@
+body{
+    background-color: #251e7e;
+    color: #FFF;
+}
+
+span{
+    font-style: italic;
+    color: grey;
+}
+
+.hdr{
+    color: #03d288;
+    font-weight: bold;
+    
+}
+
+.cntrDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lbl{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.fctl{
+    border-radius: 8px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.ptext{
+    font-size: 1.3rem;
+    color: grey;
+}
+
+/* form{
+    background-color: #FFF;
+} */
