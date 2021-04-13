@@ -4,58 +4,73 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <title>fxGuru | Home</title>
 </head>
 
-<body>
+<body class="bdr">
 
   <div class="container">
 
     <div class="row justify-content-center align-items-center">
 
-      
 
-      <div class="col col-sm-12 col-md-6 offset-0">
 
-        <div class="hdr text-center">
+      <div class="col col-sm-8 col-md-6 offset-0">
+
+        <div class="hdr text-center mb-5">
           <h2 class="display-3"><span>fx</span>Guru</h2>
           <p class="text-center ptext">Currency Calculator</p>
         </div>
 
         <div>
-          
-  
-          <form>
-  
+
+
+          <form class="form1">
+
             <div class="form-group mt-3 mb-3 ml-lg-5">
-              <label class="lbl">Password</label>
-              <input type="text" class="form-control fctl" id="">
+              <label class="lbl">Select Currency</label>
+              <select class="form-control currencySelect">
+                <option value="nil">Select One</option>
+                <option value="usd">US Dollar (USD)</option>
+                <option value="gbp">British Pound (GBP)</option>
+                <option value="cad">Canadian Dollar (CAD)</option>
+              </select>
             </div>
-  
+
             <div class="form-group mt-3 mb-3 ml-lg-5">
-              <label class="lbl">Password</label>
-              <input type="text" class="form-control fctl" id="">
+              <label class="lbl">Today's Exchange Rate</label>
+              <p class="currentRate"></p>
             </div>
+
+            <div class="form-group mt-3 mb-3 ml-lg-5">
+              <label class="lbl">Amount</label>
+              <input type="text" class="form-control cash" placeholder="Amount you wish to convert">
+            </div>
+
+            <div class="cntrDiv">
+              <label class="lbl" for="total">Total</label>
+            </div>
+
+            <div class="form-group  mb-3 ml-lg-5 cntrDiv">
+              <p class="convertedValue w-75"></p>
+            </div>
+
+            <div class="form-group  mb-3 ml-lg-5 cntrDiv">
+              <button type="button" class="btn btn-success mr-5 btn-lg calcBtn">Calculate</button>
+              <button type="button" class="btn btn-warning btn-lg clrBtn">Clear</button>
+            </div>
+
           </form>
         </div>
 
       </div>
 
-      
-
-
-
-
-
     </div>
 
-
-
   </div>
-
-
 
   <script src="app.js" async></script>
 </body>

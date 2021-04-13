@@ -3,6 +3,11 @@ body{
     color: #FFF;
 }
 
+.bdr{
+    border: 6px solid #fd8a15;
+}
+
+
 span{
     font-style: italic;
     color: grey;
@@ -36,6 +41,47 @@ span{
     color: grey;
 }
 
-/* form{
+.currencySelect{
+    font-size: 1.2rem;
+}
+
+.currentRate{
     background-color: #FFF;
-} */
+    height: 40px;
+    border-radius: 8px;
+    color: #000;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.cash{
+    max-height: 40px;
+    font-size:1.3rem;
+    border-radius:8px;
+}
+
+.convertedValue{
+    background-color: #FFF;
+    height: 50px;
+    color: #000;
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.error{
+    background-color: red;       
+}
+
+.success{
+    background-color: green;    
+}
+
+.clrBtn{
+    width:35%;
+}
+
+.calcBtn{
+    width:35%;
+}
+
