@@ -1,4 +1,6 @@
-const cashAmt = document.querySelector(".cash");
+//References to elements on the page
+
+const cashAmt = document.querySelector('.cash');
 const form1 = document.querySelector('.form1');
 const currencySelection = document.querySelector('.currencySelect');
 const currentRate = document.querySelector('.currentRate');
@@ -6,58 +8,79 @@ const calcBtn = document.querySelector('.calcBtn')
 const clrBtn = document.querySelector('.clrBtn')
 const total = document.querySelector('.convertedValue')
 
-const regEx = /(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/;
+const regEx = /^\d+$/;
 
-cashAmt.addEventListener('keyup', e =>{
-    if(regEx.test(e.target.value)){
-       cashAmt.setAttribute('class','success') ;      
+//Function to validate the cash input 
+
+// cashAmt.addEventListener('keyup', e => {
+//     if (regEx.test(e.target.value)) {
+//         cashAmt.setAttribute('class', 'success');
+//     } else {
+//         cashAmt.setAttribute('class', 'error');
+//     }
+// });
+
+function valCashInput(){
+    if (cashAmt.textContent.match(regEx)){
+       
+       true;
     } else{
-        cashAmt.setAttribute('class', 'error');
+        alert('Error')
     }
-});
-
-//API FUNCTION
-
-const currencies = async () =>{
-
-    const response = await fetch(' https://v6.exchangerate-api.com/v6/e0a0d5980401e211ef627e93/latest/USD');
-    const data = await response.json();
-    return data;
-    
 }
 
 
+//API FUNCTION
 
-// currencies().then(data=>{
-//     console.log(data.conversion_rates.JMD.toFixed(2))
-// });
+const currencies = async () => {
+    const response = await fetch(' https://v6.exchangerate-api.com/v6/e0a0d5980401e211ef627e93/latest/USD');
+    const data = await response.json();
+    return data;
+}
 
+//Function to perform calculation based on the input selected
+//'Change" is used as the event trigger, it tracks the change in the selection group
 
-currencySelection.addEventListener('change',()=>{ //change is used for select
+currencySelection.addEventListener('change', () => {
 
-    if (currencySelection.value==='usd'){
-        currencies().then(data=>{currentRate.textContent= data.conversion_rates.JMD.toFixed(2)})
-        
+    if (currencySelection.value === 'usd') {
+        currencies().then(data => { currentRate.textContent = data.conversion_rates.JMD.toFixed(2) });
     }
-    else{
-        if (currencySelection.value==='gbp'){
-            currencies().then(data=>{currentRate.textContent=data.conversion_rates.GBP.toFixed(2)})
-            
+    else if (currencySelection.value === 'gbp') {
+            currencies().then(data => {
+                calcGbp = (1 / (data.conversion_rates.GBP)) * data.conversion_rates.JMD;
+                currentRate.textContent = calcGbp.toFixed(2);
+            })
         }
-        
-    }
+    
+    else if (currencySelection.value === 'cad') {
+            currencies().then(data => {
+                calcCad = (1 / (data.conversion_rates.CAD)) * data.conversion_rates.JMD
+                currentRate.textContent = calcCad.toFixed(2)
+            })
+        }
+     
+    else if (currencySelection.value === 'eur') {
+            currencies().then(data => {
+                calcCad = (1 / (data.conversion_rates.EUR)) * data.conversion_rates.JMD
+                currentRate.textContent = calcCad.toFixed(2)
+            })
+        }
+
 })
 
 //Perform Calculation
 
-calcBtn.addEventListener('click',()=>{
+calcBtn.addEventListener('click', () => {
     calcValue = (Number(currentRate.innerHTML * cashAmt.value).toFixed(2))
 
-    total.textContent = "$" + `${calcValue}`
+    total.textContent = "$" + `${calcValue}`;
+
+    valCashInput();
 })
 
 //clear the form
 
-clrBtn.addEventListener('click', ()=>{
+clrBtn.addEventListener('click', () => {
     window.location.reload();
 })
