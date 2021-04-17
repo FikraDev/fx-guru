@@ -1,6 +1,6 @@
 body{
     background-color: #251e7e;
-    color: #FFF;
+    color: #fd8a15;
 }
 
 .bdr{
@@ -30,12 +30,6 @@ span{
     font-weight: bold;
 }
 
-/* .fctl{
-    border-radius: 8px;
-    font-size: 1.5rem;
-    text-align: center;
-} */
-
 .ptext{
     font-size: 1.3rem;
     color: grey;
@@ -56,7 +50,7 @@ span{
 
 .cash{
     text-align: center !important;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     border-radius: 8px;
     cursor:pointer;
 }
@@ -84,8 +78,7 @@ span{
 }
 
 form{
-    background-color:  #03d288;
-    opacity: 0.9;
+    background-color:  #FFF;
     padding: 0 10 10 10;
 }
 
@@ -96,3 +89,10 @@ form{
     font-size: 10px;
 }
 
+.datePara{
+    color: #fd8a15;
+}
+
+.currentRate, .cash, .convertedValue, .currencySelect{
+   border: 1px solid grey;
+}

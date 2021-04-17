@@ -1,44 +1,22 @@
 //References to elements on the page
-
-const cashAmt = document.querySelector('.cash');
-const form1 = document.querySelector('.form1');
-const currencySelection = document.querySelector('.currencySelect');
-const currentRate = document.querySelector('.currentRate');
+const cashAmt = document.querySelector('.cash')
+const form1 = document.querySelector('.form1')
+const currencySelection = document.querySelector('.currencySelect')
+const currentRate = document.querySelector('.currentRate')
 const calcBtn = document.querySelector('.calcBtn')
 const clrBtn = document.querySelector('.clrBtn')
 const total = document.querySelector('.convertedValue')
 const errMsg = document.querySelector('.errMsg')
 
-const regEx = /^\d+(\.\d*)?$|^\.\d+$/;
-
-// const datePara = document.querySelector('.datePara')
-// datePara.textContent = new Date;
-
-//Function to validate the cash input 
-
-cashAmt.addEventListener('keyup', e => {
-    if (regEx.test(e.target.value)) {
-        true;
-        errMsg.style.visibility = "hidden"
-    } else {
-        errMsg.style.visibility = "visible";
-        cashAmt.value = "";
-        total.value = "";
-    }
-});
+const regEx = /^\d+(\.\d*)?$|^\.\d+$/
 
 
-//API FUNCTION
-
-const currencies = async () => {
-    const response = await fetch(' https://v6.exchangerate-api.com/v6/e0a0d5980401e211ef627e93/latest/USD');
-    const data = await response.json();
-    return data;
-}
+//Display current date on page
+let datePara = document.querySelector('.datePara')
+datePara.textContent = new Date().toDateString()
 
 //Function to perform calculation based on the input selected
 //'Change" is used as the event trigger, it tracks the change in the selection group
-
 currencySelection.addEventListener('change', () => {
 
     if (currencySelection.value === 'usd') {
@@ -50,7 +28,7 @@ currencySelection.addEventListener('change', () => {
     }
     else if (currencySelection.value === 'gbp') {
         currencies().then(data => {
-            calcGbp = (1 / (data.conversion_rates.GBP)) * data.conversion_rates.JMD;
+            calcGbp = (1 / (data.conversion_rates.GBP)) * data.conversion_rates.JMD
             currentRate.textContent = `\$${calcGbp.toFixed(2)}`
             currRateCalcValue = calcGbp.toFixed(2)
         })
@@ -82,27 +60,42 @@ currencySelection.addEventListener('change', () => {
 
 });
 
-//function to check for empty values
+//API FUNCTION
+const currencies = async () => {
+    const response = await fetch(' https://v6.exchangerate-api.com/v6/e0a0d5980401e211ef627e93/latest/USD')
+    const data = await response.json()
+    return data
+}
 
+//Function to validate the cash input 
+cashAmt.addEventListener('keyup', e => {
+    if (regEx.test(e.target.value)) {
+        true;
+        errMsg.style.visibility = "hidden"
+    } else {
+        errMsg.style.visibility = "visible"
+        cashAmt.value = ""
+        total.value = ""
+    }
+})
+
+//function to check for empty values
 function checkEmptyVals() {
     if (cashAmt.value === '') {
         alert('There are empty values')
-        total.textContent = '';
-        currentRate.innerHTML = '';
+        total.textContent = ''
+        currentRate.innerHTML = ''
     }
 }
 
 //Perform Calculation
-
 calcBtn.addEventListener('click', () => {
     calcValue = (Number(currRateCalcValue * cashAmt.value).toFixed(2))
-    total.textContent = `$${calcValue}`;
+    total.textContent = `$${calcValue}`
+    checkEmptyVals()
+})
 
-    checkEmptyVals();
-});
-
-//clear the form
-
+//clear form
 clrBtn.addEventListener('click', () => {
-    window.location.reload();
+    window.location.reload()
 })
