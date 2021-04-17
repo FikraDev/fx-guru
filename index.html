@@ -21,13 +21,16 @@
       <div class="col col-sm-8 col-md-5 offset-0">
 
         <div class="hdr text-center mb-2">
-          <h2 class="display-3"><span>fx</span>Guru</h2>
+          <h2 class="display-4 font-weight-bold"><span>fx</span>Guru</h2>
           <p class="text-center ptext">Currency Calculator</p>
         </div>
 
         <div>
+          <p class=datePara"></p>
+        </div>
 
-
+        <div>
+          
           <form class="form1">
 
             <div class="form-group mt-3 mb-3">
@@ -38,6 +41,7 @@
                 <option value="gbp">British Pound (GBP)</option>
                 <option value="cad">Canadian Dollar (CAD)</option>
                 <option value="eur">Euro (EUR)</option>
+                <option value="kyd">Cayman Dollar (CI)</option>
               </select>
             </div>
 
@@ -48,9 +52,10 @@
 
 
            
-            <div class="form-group mt-3 mb-3">
+            <div class="form-group mt-2 mb-3">
               <label class="lbl">Amount</label>
-              <input type="text" class="form-control cash">
+              <input type="text" class="form-control cash" placeholder="Amount to be converted">
+              <p class="errMsg">Please Enter a Numberic Value</p>
             </div>
 
             <div class="cntrDiv">
@@ -65,7 +70,7 @@
               <button type="button" class="btn btn-success mr-5 btn-lg calcBtn">Calculate</button>
               <button type="button" class="btn btn-warning btn-lg clrBtn">Clear</button>
             </div>
-
+            <p class="text-center text-primary font-weight-bold">**Please note that these rates are subjected to change without notice.**</p>
           </form>
         </div>
 
@@ -73,6 +78,9 @@
 
     </div>
 
+  </div>
+  <div class="text-center">
+    <p>Copyright &copy; 2021 fikraOps</p>
   </div>
 
   <script src="app.js" async></script>

@@ -7,27 +7,25 @@ const currentRate = document.querySelector('.currentRate');
 const calcBtn = document.querySelector('.calcBtn')
 const clrBtn = document.querySelector('.clrBtn')
 const total = document.querySelector('.convertedValue')
+const errMsg = document.querySelector('.errMsg')
 
-const regEx = /^\d+$/;
+const regEx = /^\d+(\.\d*)?$|^\.\d+$/;
+
+// const datePara = document.querySelector('.datePara')
+// datePara.textContent = new Date;
 
 //Function to validate the cash input 
 
-// cashAmt.addEventListener('keyup', e => {
-//     if (regEx.test(e.target.value)) {
-//         cashAmt.setAttribute('class', 'success');
-//     } else {
-//         cashAmt.setAttribute('class', 'error');
-//     }
-// });
-
-function valCashInput(){
-    if (cashAmt.textContent.match(regEx)){
-       
-       true;
-    } else{
-        alert('Error')
+cashAmt.addEventListener('keyup', e => {
+    if (regEx.test(e.target.value)) {
+        true;
+        errMsg.style.visibility = "hidden"
+    } else {
+        errMsg.style.visibility = "visible";
+        cashAmt.value = "";
+        total.value = "";
     }
-}
+});
 
 
 //API FUNCTION
@@ -44,40 +42,64 @@ const currencies = async () => {
 currencySelection.addEventListener('change', () => {
 
     if (currencySelection.value === 'usd') {
-        currencies().then(data => { currentRate.textContent = data.conversion_rates.JMD.toFixed(2) });
+        currencies().then(data => {
+            calcUsd = data.conversion_rates.JMD
+            currentRate.textContent = `\$${calcUsd.toFixed(2)}`
+            currRateCalcValue = calcUsd.toFixed(2)
+        });
     }
     else if (currencySelection.value === 'gbp') {
-            currencies().then(data => {
-                calcGbp = (1 / (data.conversion_rates.GBP)) * data.conversion_rates.JMD;
-                currentRate.textContent = calcGbp.toFixed(2);
-            })
-        }
-    
-    else if (currencySelection.value === 'cad') {
-            currencies().then(data => {
-                calcCad = (1 / (data.conversion_rates.CAD)) * data.conversion_rates.JMD
-                currentRate.textContent = calcCad.toFixed(2)
-            })
-        }
-     
-    else if (currencySelection.value === 'eur') {
-            currencies().then(data => {
-                calcCad = (1 / (data.conversion_rates.EUR)) * data.conversion_rates.JMD
-                currentRate.textContent = calcCad.toFixed(2)
-            })
-        }
+        currencies().then(data => {
+            calcGbp = (1 / (data.conversion_rates.GBP)) * data.conversion_rates.JMD;
+            currentRate.textContent = `\$${calcGbp.toFixed(2)}`
+            currRateCalcValue = calcGbp.toFixed(2)
+        })
+    }
 
-})
+    else if (currencySelection.value === 'cad') {
+        currencies().then(data => {
+            calcCad = (1 / (data.conversion_rates.CAD)) * data.conversion_rates.JMD
+            currentRate.textContent = `\$${calcCad.toFixed(2)}`// the /escapes the dollar sign
+            currRateCalcValue = calcCad.toFixed(2)
+        })
+    }
+
+    else if (currencySelection.value === 'eur') {
+        currencies().then(data => {
+            calcEur = (1 / (data.conversion_rates.EUR)) * data.conversion_rates.JMD
+            currentRate.textContent = `\$${calcEur.toFixed(2)}`
+            currRateCalcValue = calcEur.toFixed(2)
+        })
+    }
+
+    else if (currencySelection.value === 'kyd') {
+        currencies().then(data => {
+            calcKyd = (1 / (data.conversion_rates.KYD)) * data.conversion_rates.JMD //curr xchange rate
+            currentRate.textContent = `\$${calcKyd.toFixed(2)}` //value displayed as rate
+            currRateCalcValue = calcKyd.toFixed(2) //value used to calculate
+        })
+    }
+
+});
+
+//function to check for empty values
+
+function checkEmptyVals() {
+    if (cashAmt.value === '') {
+        alert('There are empty values')
+        total.textContent = '';
+        currentRate.innerHTML = '';
+    }
+}
 
 //Perform Calculation
 
 calcBtn.addEventListener('click', () => {
-    calcValue = (Number(currentRate.innerHTML * cashAmt.value).toFixed(2))
+    calcValue = (Number(currRateCalcValue * cashAmt.value).toFixed(2))
+    total.textContent = `$${calcValue}`;
 
-    total.textContent = "$" + `${calcValue}`;
-
-    valCashInput();
-})
+    checkEmptyVals();
+});
 
 //clear the form
 

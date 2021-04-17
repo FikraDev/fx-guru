@@ -89,3 +89,10 @@ form{
     padding: 0 10 10 10;
 }
 
+.errMsg{
+    color: red;
+    font-weight: bold;
+    visibility: hidden;
+    font-size: 10px;
+}
+
