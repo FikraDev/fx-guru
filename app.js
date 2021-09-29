@@ -90,7 +90,7 @@ function checkEmptyVals() {
 
 //Perform Calculation
 calcBtn.addEventListener('click', () => {
-    calcValue = (Number(currRateCalcValue * `$${cashAmt.value}`).toFixed(2))
+    calcValue = (Number(currRateCalcValue * cashAmt.value).toFixed(2))
     total.textContent = `$${calcValue}`
     checkEmptyVals()
 })
